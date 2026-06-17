@@ -2,11 +2,9 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-// ============================================================
 //  MainMenu.qml — Pantalla de bienvenida
 //  Estética: Frutiger Aero (gradientes cielo-verde, vidrio,
 //  brillo, bordes luminosos, tipografía clara).
-// ============================================================
 Item {
     id: root
 

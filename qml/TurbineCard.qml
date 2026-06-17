@@ -1,13 +1,10 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-
-// ============================================================
 //  TurbineCard.qml — Tarjeta de aerogenerador
 //  Estética Frutiger Aero: vidrio, esquinas redondeadas,
 //  borde luminoso, hover 3D.
 //  Incluye Popup de detalle con mini-mapa cartesiano.
-// ============================================================
 Rectangle {
     id: root
 
@@ -195,9 +192,7 @@ Rectangle {
         }
     }
 
-    // ============================================================
     //  POPUP DE DETALLE (Aero Glass flotante)
-    // ============================================================
     Popup {
         id: detailPopup
         modal: true
@@ -330,7 +325,7 @@ Rectangle {
                     }
                 }
 
-                // --- Mini-Mapa cartesiano ---
+                // Mini-Mapa cartesiano
                 ColumnLayout {
                     spacing: 4; Layout.preferredWidth: 165
 

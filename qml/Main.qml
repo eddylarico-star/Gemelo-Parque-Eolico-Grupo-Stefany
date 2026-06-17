@@ -1,4 +1,4 @@
-import QtQuick
+import QtQuick //rectangulos, textos, imagenes
 import QtQuick.Controls
 
 Window {

@@ -3,7 +3,6 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtMultimedia
 
-// ============================================================
 //  Dashboard.qml — Panel principal del Gemelo Digital
 //  ✅ Fix navegación: onClicked usa StackView.view.pop()
 //  ✅ Estética Frutiger Aero completa
@@ -12,12 +11,12 @@ import QtMultimedia
 //  ✅ Control de clima con ComboBox
 //  ✅ Reloj/fecha tipo Gadget Vista
 //  ✅ Notificación de fallos con banner
-//  ✅ [TAREA 1] Audio Qt6 Multimedia: alerta, ambiental, click
-// ============================================================
+//  ✅ Audio Qt6 Multimedia: alerta, ambiental, click
+//''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Item {
     id: dashRoot
 
-    // --- Propiedades principales ---
+    // Propiedades principales
     property int  selectedId:  1
     readonly property bool  globalEmergency: parqueEolicoModel.emergenciaGlobal
     readonly property real  totalPower:      parqueEolicoModel.potenciaTotal
@@ -38,7 +37,6 @@ Item {
 
     // ============================================================
     //  TAREA 1 — AUDIO Qt6 Multimedia
-    // ============================================================
 
     // 1a) Sonido de alerta (se activa con onFalloDetectado)
     MediaPlayer {
@@ -60,7 +58,7 @@ Item {
         Component.onCompleted: playerAmbiental.play()
     }
 
-    // 1c) Click de botón (reproducción instantánea)
+    // 1c) Click de botón
     MediaPlayer {
         id: playerClick
         source: "qrc:/ParteSantiago/assets/audio/click.wav"
@@ -78,7 +76,7 @@ Item {
 
         // Alerta sonora + banner visual al detectar fallo
         function onFalloDetectado(turbinaId, tipo) {
-            dashRoot.mensajeFallo = "⚡  FALLO DETECTADO — Turbina " + turbinaId + ": " + tipo
+            dashRoot.mensajeFallo = "⚡ FALLO DETECTADO — Turbina " + turbinaId + ": " + tipo
             dashRoot.bannerVisible = true
             bannerTimer.restart()
             // Reproducir sonido de alerta
@@ -123,9 +121,7 @@ Item {
         onTriggered: dashRoot.bannerVisible = false
     }
 
-    // ============================================================
     //  FONDO AERO (cambia según el clima)
-    // ============================================================
     Rectangle {
         anchors.fill: parent
         gradient: Gradient {
@@ -155,9 +151,7 @@ Item {
         anchors.fill: parent
         spacing: 0
 
-        // ========================================================
         //  HEADER — Título + navegación + reloj + clima
-        // ========================================================
         Rectangle {
             Layout.fillWidth: true
             height: 58
@@ -195,7 +189,7 @@ Item {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
-                        // ✅ FIX CRÍTICO: pop() navega de vuelta a MainMenu.qml
+                        //  FIX CRÍTICO: pop() navega de vuelta a MainMenu.qml
                         onClicked: {
                             dashRoot.playClick()
                             dashRoot.StackView.view.pop()
@@ -333,10 +327,7 @@ Item {
                 }
             }
         }
-
-        // ========================================================
         //  BARRA DE ESTADÍSTICAS GLOBALES (Aero)
-        // ========================================================
         Rectangle {
             Layout.fillWidth: true
             height: 56
@@ -381,9 +372,7 @@ Item {
             }
         }
 
-        // ========================================================
         //  BANNER DE FALLO (aparece y desaparece)
-        // ========================================================
         Rectangle {
             Layout.fillWidth: true
             height: dashRoot.bannerVisible ? 36 : 0
@@ -402,10 +391,7 @@ Item {
                 color: "#883300"; font.pixelSize: 12; font.bold: true
             }
         }
-
-        // ========================================================
         //  ÁREA PRINCIPAL: Grid de turbinas + gráfico
-        // ========================================================
         RowLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -447,7 +433,7 @@ Item {
                 }
             }
 
-            // ── Panel derecho: Gráfico + Registro de eventos ──
+            // Panel derecho: Gráfico + Registro de eventos
             ColumnLayout {
                 Layout.preferredWidth: 240
                 Layout.minimumWidth:   240
@@ -551,10 +537,7 @@ Item {
                 }
             }
         }
-
-        // ========================================================
         //  FOOTER — Controles avanzados
-        // ========================================================
         Rectangle {
             Layout.fillWidth: true
             height: 100
