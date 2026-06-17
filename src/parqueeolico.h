@@ -10,12 +10,10 @@
 #include <QTime>
 #include "turbina.h"
 
-// ============================================================
 //  ParqueEolico — Modelo principal del Gemelo Digital
 //  Expuesto a QML como QAbstractListModel.
 //  Gestión dinámica de turbinas + sistema de fallos aleatorios
 //  + lógica de clima + registro de eventos.
-// ============================================================
 class ParqueEolico : public QAbstractListModel
 {
     Q_OBJECT

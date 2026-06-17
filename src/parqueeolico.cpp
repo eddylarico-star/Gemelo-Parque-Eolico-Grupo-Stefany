@@ -1,11 +1,8 @@
 #include "parqueeolico.h"
 #include <QRandomGenerator>
 #include <QDebug>
-
-// ============================================================
 //  Constructor: crea las turbinas iniciales con coordenadas
 //  distribuidas en el mapa del parque (posX, posY ∈ 0-100).
-// ============================================================
 ParqueEolico::ParqueEolico(int numTurbinas, QObject *parent)
     : QAbstractListModel(parent),
       m_potenciaTotal(0.0),
@@ -66,9 +63,7 @@ ParqueEolico::~ParqueEolico()
     m_turbinas.clear();
 }
 
-// ============================================================
 //  QAbstractListModel
-// ============================================================
 int ParqueEolico::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) return 0;
@@ -132,10 +127,7 @@ QHash<int, QByteArray> ParqueEolico::roleNames() const
     roles[PosYRole]             = "posY";
     return roles;
 }
-
-// ============================================================
 //  Propiedades calculadas
-// ============================================================
 double ParqueEolico::potenciaPromedio() const
 {
     if (m_turbinas.isEmpty()) return 0.0;
@@ -161,10 +153,7 @@ void ParqueEolico::setEmergenciaGlobal(bool valor)
     registrarEvento(valor ? "⚠ CORTE DE EMERGENCIA GLOBAL ACTIVADO."
                           : "✓ Sistema reanudado desde emergencia global.");
 }
-
-// ============================================================
 //  Gestión dinámica de turbinas
-// ============================================================
 void ParqueEolico::agregarTurbina()
 {
     m_contadorIdsTurbinas++;
@@ -217,10 +206,7 @@ void ParqueEolico::eliminarTurbina(int turbinaId)
     recalcularPotenciaTotal();
     emit modeloRestructurado();
 }
-
-// ============================================================
 //  Control individual de turbinas
-// ============================================================
 void ParqueEolico::actualizarVelocidad(int index, double nuevaVelocidad)
 {
     if (index < 0 || index >= m_turbinas.count()) return;
@@ -276,9 +262,7 @@ void ParqueEolico::completarMantenimiento(int turbinaId)
                     + " — Salud restaurada al 100%");
 }
 
-// ============================================================
 //  Simulación en tiempo real
-// ============================================================
 void ParqueEolico::actualizarSimulacion()
 {
     if (m_emergenciaGlobal) return;
@@ -339,10 +323,7 @@ void ParqueEolico::verificarFallosAleatorios()
     emit falloDetectado(m_turbinas[idx]->id(), tipo);
     emit alertaSonora("fallo");
 }
-
-// ============================================================
 //  Control de clima
-// ============================================================
 void ParqueEolico::cambiarClima(const QString &clima)
 {
     m_climaActual = clima;
@@ -361,10 +342,7 @@ void ParqueEolico::cambiarClima(const QString &clima)
     emit climaCambiado();
     registrarEvento("☁ Clima cambiado a: " + clima);
 }
-
-// ============================================================
 //  Helpers privados
-// ============================================================
 void ParqueEolico::recalcularPotenciaTotal()
 {
     double total = 0.0;

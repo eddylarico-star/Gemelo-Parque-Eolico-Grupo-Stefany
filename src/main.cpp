@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    // Creamos el parque con 5 turbinas iniciales
+    // Se creo el parque con 5 turbinas iniciales
     ParqueEolico miParqueEolico(5);
     miParqueEolico.setEmergenciaGlobal(false);
 

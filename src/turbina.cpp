@@ -1,10 +1,7 @@
 #include "turbina.h"
 #include <cmath>
 #include <QDate>
-
-// ============================================================
 //  Constructor
-// ============================================================
 Turbina::Turbina(int id, const QString &nombre,
                  double velocidadInicialKmh, double eficienciaInicial,
                  double potenciaMaximaMW, double orientacionGrados,
@@ -39,14 +36,11 @@ Turbina::Turbina(int id, const QString &nombre,
     m_historialPotencia.fill(0.0, MAX_HISTORIAL);
     recalcularTodo();
 }
-
-// ============================================================
 //  FÍSICA REAL: P = 0.5 * rho * A * v³ * Cp
 //  rho = 1.225 kg/m³ (densidad del aire a nivel del mar, 15°C)
 //  A   = π * r²  (área barrida por el rotor)
 //  v   = velocidad del viento en m/s
 //  Cp  = coeficiente de potencia (eficiencia, ≤ límite Betz 0.593)
-// ============================================================
 double Turbina::calcularPotenciaFisicaW() const
 {
     double v_ms = m_velocidadVientoKmh / 3.6;   // km/h → m/s
@@ -175,10 +169,7 @@ void Turbina::recalcularTodo()
     evaluarAlertas();
     emit datosActualizados();
 }
-
-// ============================================================
 //  Setters públicos
-// ============================================================
 void Turbina::setVelocidadViento(double valueKmh)
 {
     if (valueKmh < 0.0)   valueKmh = 0.0;
@@ -221,10 +212,7 @@ void Turbina::setEficiencia(double value)
     m_eficiencia = value;
     recalcularTodo();
 }
-
-// ============================================================
 //  Control operativo
-// ============================================================
 void Turbina::paradaCritica()
 {
     m_detenidaManualmente = true;

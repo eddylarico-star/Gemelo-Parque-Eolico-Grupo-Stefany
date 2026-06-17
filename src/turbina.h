@@ -5,13 +5,9 @@
 #include <QString>
 #include <QVector>
 #include <QDateTime>
-
-// ============================================================
 //  Clase Turbina — Gemelo Digital Parque Eólico
-//  Programación II · Dr. Dennis Barrios
-//  Incluye: física real P=0.5*rho*A*v³*Cp, estados de fallo,
+//  Incluye: física real
 //  mantenimiento, historial técnico y coordenadas de mapa.
-// ============================================================
 class Turbina : public QObject
 {
     Q_OBJECT
@@ -30,20 +26,20 @@ class Turbina : public QObject
     Q_PROPERTY(QString estado           READ estado                                     NOTIFY datosActualizados)
     Q_PROPERTY(bool    alerta           READ alerta                                     NOTIFY alertaCambiada)
 
-    // --- Propiedades de física real (fórmula Betz) ---
+    // Propiedades de física real (fórmula Betz)
     Q_PROPERTY(double  potenciaFisica   READ potenciaFisica                             NOTIFY datosActualizados)
     Q_PROPERTY(double  areaRotor        READ areaRotor                                  CONSTANT)
 
-    // --- Propiedades de fallos y mantenimiento ---
+    // Propiedades de fallos y mantenimiento
     Q_PROPERTY(QString tipoFallo        READ tipoFallo                                  NOTIFY falloOcurrido)
     Q_PROPERTY(bool    enMantenimiento  READ enMantenimiento                            NOTIFY estadoMantenimientoCambiado)
     Q_PROPERTY(double  saludPorcentaje  READ saludPorcentaje                            NOTIFY datosActualizados)
 
-    // --- Propiedades de historial técnico ---
+    // Propiedades de historial técnico
     Q_PROPERTY(QString fechaUltimaRevision READ fechaUltimaRevision                     CONSTANT)
     Q_PROPERTY(int     horasServicio       READ horasServicio                            NOTIFY datosActualizados)
 
-    // --- Coordenadas en el mapa del parque ---
+    // Coordenadas en el mapa del parque
     Q_PROPERTY(double  posX             READ posX                                       CONSTANT)
     Q_PROPERTY(double  posY             READ posY                                       CONSTANT)
 
@@ -57,7 +53,7 @@ public:
                      double posY = 50.0,
                      QObject *parent = nullptr);
 
-    // --- Getters básicos ---
+    // Getters básicos
     int     id()              const { return m_id; }
     QString nombre()          const { return m_nombre; }
     double  velocidadViento() const { return m_velocidadVientoKmh; }
@@ -71,12 +67,12 @@ public:
     QString estado()          const { return m_estado; }
     bool    alerta()          const { return m_alerta; }
 
-    // --- Getters de física real ---
+    // Getters de física real
     // P = 0.5 * rho * A * v^3 * Cp  (Watts)
     double  potenciaFisica()  const { return m_potenciaFisicaW; }
     double  areaRotor()       const { return m_areaRotor; }
 
-    // --- Getters de fallos/mantenimiento ---
+    // Getters de fallos/mantenimiento
     QString tipoFallo()        const { return m_tipoFallo; }
     bool    enMantenimiento()  const { return m_enMantenimiento; }
     double  saludPorcentaje()  const { return m_saludPorcentaje; }
@@ -85,22 +81,22 @@ public:
     QString fechaUltimaRevision() const { return m_fechaUltimaRevision; }
     int     horasServicio()       const { return m_horasServicio; }
 
-    // --- Getters de posición en mapa ---
+    // Getters de posición en mapa
     double  posX() const { return m_posX; }
     double  posY() const { return m_posY; }
 
-    // --- Setters ---
+    // Setters
     void setVelocidadViento(double valueKmh);
     void setDireccionViento(double valueGrados);
     void setTemperatura(double value);
     void setAnguloPitch(double value);
     void setEficiencia(double value);
 
-    // --- Control operativo ---
+    // Control operativo
     Q_INVOKABLE void paradaCritica();
     Q_INVOKABLE void reanudar();
     Q_INVOKABLE void activarMantenimiento();
-    Q_INVOKABLE void completarMantenimiento();  // Restaura salud al 100%
+    Q_INVOKABLE void completarMantenimiento();  //Restaura salud al 100%
 
     bool detenidaManualmente() const { return m_detenidaManualmente; }
 
